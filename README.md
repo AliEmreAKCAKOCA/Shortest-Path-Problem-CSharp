@@ -1,4 +1,31 @@
-## Shortest Path Problem - C# & OR-Tools
+﻿## Shortest Path Problem - C# & OR-Tools
+`dotnet restore` downloads the `Google.OrTools` package. `dotnet run` compiles the app and solves the default matrices in `Program.cs`.
+
+---
+
+## 🧩 Customizing the Model
+- Update the `c` and `R` arrays in `Program.cs` to represent your own graph. Keep them square and of the same dimension.
+- Increase or decrease the node count by resizing both matrices; the code derives `n` from `c.GetLength(0)`, so no other changes are needed.
+- Ensure that every edge with `R[i,j] = 1` has a reasonable cost in `c[i,j]`.
+
+---
+
+## 📁 Project Layout
+- `Program.cs` - defines the matrices, builds the ILP model, and prints the solution.
+- `Shortest-Path-Problem-CSharp.csproj` - targets `net9.0` and references `Google.OrTools`.
+- `README.md` - this document.
+
+---
+
+## 🧑‍💻 Troubleshooting
+- **`solver` is null:** SCIP might not be available on your platform. Reinstall OR-Tools or switch to a different backend (e.g., `CBC`).
+- **Build or restore fails:** confirm that .NET SDK 9.0 is installed and `dotnet --version` reports 9.x.
+- **Unexpected solution:** check that `R` correctly describes allowed edges and that forbidden edges carry a very high cost.
+
+The sample data purposely yields two optimal routes (`0-2-4` and `0-2-3-4`). Feel free to plug in larger graphs or different cost structures to explore how the solver behaves.
+
+---
+
 
 This console app shows how to formulate a shortest-path problem as an integer linear program using Google OR-Tools. It connects a source node (0) to a sink node (`n - 1`) while minimizing the total travel cost over all available edges.
 
